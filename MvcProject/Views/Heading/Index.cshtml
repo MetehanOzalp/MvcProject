@@ -1,0 +1,132 @@
+﻿@using Entities.Concrete
+@model List<Heading>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body class="hold-transition sidebar-mini">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Başlık İşlemleri</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Başlıklar</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%">
+                                #
+                            </th>
+                            <th style="width: 20%">
+                                Başlık Adı
+                            </th>
+                            <th style="width: 15%">
+                                Oluşturan Yazar
+                            </th>
+                            <th style="width: 10%">
+                                Durum
+                            </th>
+                            <th style="width: 8%" class="text-center">
+                                Kategori
+                            </th>
+                            <th style="width: 20%">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.HeadingId
+                                </td>
+                                <td>
+                                    <a>
+                                        @item.HeadingName
+                                    </a>
+                                    <br />
+                                    <small>
+                                        @item.HeadingDate.ToString("dd-MMMM-yyyy")
+                                    </small>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar" src="@item.Writer.ImagePath" style="width:50px;height:50px">
+                                            <span>@item.Writer.Name @item.Writer.SurName</span>
+                                        </li>
+                                    </ul>
+                                </td>
+                                @switch (@item.Status)
+                                {
+                                    case true:
+                                        <td style="color:#26ca9a">Aktif</td>
+                                        break;
+                                    case false:
+                                        <td style="color:#e83c5f">Pasif</td>
+                                        break;
+                                }
+                                <td class="project-state">
+                                    <span class="badge" style="background-color:@item.Category.ColorCode">@item.Category.Name</span>
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="~/Content/ContentByHeading/@item.HeadingId">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Yazılar
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="/Heading/Update/@item.HeadingId">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Düzenle
+                                    </a>
+                                    @switch (item.Status)
+                                    {
+                                        case true:
+                                            <a class="btn btn-danger btn-sm" href="/Heading/ChangeStatus/@item.HeadingId">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Pasif Yap
+                                            </a>
+                                            break;
+                                        case false:
+                                            <a class="btn btn-success btn-sm" href="/Heading/ChangeStatus/@item.HeadingId">
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Aktif Yap
+                                            </a>
+                                            break;
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <a href="/Heading/Add" class="btn btn-info">Yeni Başlık Ekle</a>
+</body>
+</html>

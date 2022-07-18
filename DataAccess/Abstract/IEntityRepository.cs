@@ -12,6 +12,7 @@ namespace DataAccess.Abstract
     {
         void Add(T t);
         void Delete(T t);
+        T Get(Expression<Func<T, bool>> filter);
         List<T> GetAll();
         List<T> GetAll(Expression<Func<T, bool>> filter);
         void Update(T t);

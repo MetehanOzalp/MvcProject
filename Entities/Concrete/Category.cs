@@ -18,6 +18,9 @@ namespace Entities.Concrete
         [StringLength(200)]
         public string Description { get; set; }
 
+        [StringLength(20)]
+        public string ColorCode { get; set; }
+
         public bool Status { get; set; }
 
         public ICollection<Heading> Headings { get; set; }

@@ -17,17 +17,16 @@ namespace DataAccess.Concrete.EntityFramework
 
         public EfEntityRepositoryBase()
         {
-            using (TContext context = new TContext())
-            {
-                _object = context.Set<TEntity>();
-            }
+            TContext context = new TContext();
+            _object = context.Set<TEntity>();
         }
 
         public void Add(TEntity t)
         {
             using (TContext context = new TContext())
             {
-                _object.Add(t);
+                var addedEntity = context.Entry(t);
+                addedEntity.State = EntityState.Added;
                 context.SaveChanges();
             }
         }
@@ -36,31 +35,36 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                _object.Remove(t);
+                var deletedEntity = context.Entry(t);
+                deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
+            }
+        }
+
+        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().FirstOrDefault(filter);
             }
         }
 
         public List<TEntity> GetAll()
         {
-            using (TContext context = new TContext())
-            {
-                return _object.ToList();
-            }
+            return _object.ToList();
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter)
         {
-            using (TContext context = new TContext())
-            {
-                return _object.Where(filter).ToList();
-            }
+            return _object.Where(filter).ToList();
         }
 
         public void Update(TEntity t)
         {
             using (TContext context = new TContext())
             {
+                var updatedEntity = context.Entry(t);
+                updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

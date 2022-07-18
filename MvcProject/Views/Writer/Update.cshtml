@@ -1,0 +1,47 @@
+﻿@model Entities.Concrete.Writer
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yazar Güncelle</h1>
+@using (Html.BeginForm("Update", "Writer", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Yazar Id")
+        @Html.TextBoxFor(w => w.WriterId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.WriterId, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Adı")
+        @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.Name, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Soyadı")
+        @Html.TextBoxFor(w => w.SurName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.SurName, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Mail")
+        @Html.TextBoxFor(w => w.Mail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.Mail, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Şifresi")
+        @Html.TextBoxFor(w => w.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.Password, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Görsel Linki")
+        @Html.TextBoxFor(w => w.ImagePath, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.ImagePath, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Unvan")
+        @Html.TextBoxFor(w => w.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.Title, null, new { @class = "text-danger" })
+        <br />
+        @Html.Label("Yazar Hakkında")
+        @Html.TextAreaFor(w => w.About, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w => w.About, null, new { @class = "text-danger" })
+        <br />
+        <button class="btn btn btn-info">Yazar Güncelle</button>
+    </div>
+}
+

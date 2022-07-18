@@ -16,6 +16,8 @@ namespace Entities.Concrete
         public string HeadingName { get; set; }
         public DateTime HeadingDate { get; set; }
 
+        public bool Status { get; set; }
+
         public int WriterId { get; set; }
         public virtual Writer Writer { get; set; }
 

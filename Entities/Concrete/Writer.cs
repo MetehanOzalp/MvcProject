@@ -18,14 +18,22 @@ namespace Entities.Concrete
         [StringLength(50)]
         public string SurName { get; set; }
 
-        [StringLength(100)]
+        [StringLength(300)]
         public string ImagePath { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
+        public string About { get; set; }
+
+        [StringLength(200)]
         public string Mail { get; set; }
 
-        [StringLength(20)]
+        [StringLength(200)]
         public string Password { get; set; }
+
+        [StringLength(50)]
+        public string Title { get; set; }
+
+        public bool Status { get; set; }
 
         public ICollection<Heading> Headings { get; set; }
         public ICollection<Content> Contents { get; set; }

@@ -17,6 +17,8 @@ namespace Entities.Concrete
 
         public DateTime ContentDate { get; set; }
 
+        public bool Status { get; set; }
+
         public int? WriterId { get; set; }
         public virtual Writer Writer { get; set; }
 
