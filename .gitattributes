@@ -4,7 +4,7 @@
 * text=auto
 *.js linguist-detectable=false
 *.css linguist-detectable=false
-*.html linguist-detectable=false
+*.html -linguist-detectable
 *.scss linguist-detectable=false
 
 ###############################################################################
